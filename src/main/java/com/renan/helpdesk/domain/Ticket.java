@@ -3,20 +3,41 @@ package com.renan.helpdesk.domain;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.renan.helpdesk.domain.enums.Priority;
 import com.renan.helpdesk.domain.enums.Status;
 
+@Entity
 public class Ticket {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@JsonFormat
 	private LocalDate dateOpened = LocalDate.now();
+	
+	@JsonFormat
 	private LocalDate dateClosed;
 	private Priority priority;
 	private Status status;
 	private String title;
 	private String observation;
 	
+	@ManyToOne
+	@JoinColumn(name = "technician_id")
 	private Technician technician;
+	
+	@ManyToOne
+	@JoinColumn(name = "client_id")
 	private Client client;
 	
 	public Ticket() {
