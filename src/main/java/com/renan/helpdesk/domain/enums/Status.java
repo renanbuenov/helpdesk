@@ -2,7 +2,7 @@ package com.renan.helpdesk.domain.enums;
 
 public enum Status {
 
-	ADMINI(0, "OPENED"), CLIENT(1, "RUNNING"), TECH(2, "FINISHED");
+	OPENED(0, "OPENED"), INPROGRESS(1, "IN_PROGRESS"), FINISHED(2, "FINISHED");
 
 	private Integer code;
 	private String description;

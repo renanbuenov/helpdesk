@@ -2,7 +2,7 @@ package com.renan.helpdesk.domain.enums;
 
 public enum Profile {
 
-	ADMINI(0, "ROLE_ADMIN"), CLIENT(1, "ROLE_CLIENT"), TECH(2, "ROLE_TECH");
+	ADMIN(0, "ROLE_ADMIN"), CLIENT(1, "ROLE_CLIENT"), TECH(2, "ROLE_TECH");
 
 	private Integer code;
 	private String description;
