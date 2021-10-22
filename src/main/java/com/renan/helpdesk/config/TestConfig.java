@@ -15,7 +15,7 @@ public class TestConfig {
 	private DBService dbService;
 	
 	@Bean
-	public void instanceDB() {
-		this.dbService.instanceDB();
+	public void instanciaDB() {
+		this.dbService.instanciaDB();
 	}
 }
