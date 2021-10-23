@@ -1,5 +1,6 @@
 package com.renan.helpdesk.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.renan.helpdesk.services.exceptions.ObjectNotFoundException;
@@ -18,5 +19,9 @@ public class TechService {
 	public Technician findById(Integer id) {
 		Optional<Technician> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found! Id: " + id));
+	}
+
+	public List<Technician> findAll() {
+		return repository.findAll();
 	}
 }
