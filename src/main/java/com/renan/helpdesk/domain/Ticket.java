@@ -1,5 +1,6 @@
 package com.renan.helpdesk.domain;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -16,17 +17,18 @@ import com.renan.helpdesk.domain.enums.Priority;
 import com.renan.helpdesk.domain.enums.Status;
 
 @Entity
-public class Ticket {
-	
+public class Ticket implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@JsonFormat
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dateOpened = LocalDate.now();
-	
-	@JsonFormat
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dateClosed;
+	
 	private Priority priority;
 	private Status status;
 	private String title;
