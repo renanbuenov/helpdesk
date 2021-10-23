@@ -22,7 +22,7 @@ public class DBService {
 	@Autowired
 	private PersonRepository personRepository;
 
-	public void instanciaDB() {
+	public void instanceDB() {
 
 		Technician tec1 = new Technician(null, "Renan Bueno", "550.482.150-95", "renan@mail.com", "123");
 		tec1.addProfile(Profile.ADMIN);
