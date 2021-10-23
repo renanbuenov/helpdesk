@@ -34,7 +34,7 @@ public abstract class Person implements Serializable {
 	
 	@Column(unique = true)
 	protected String email;
-	protected String senha;
+	protected String password;
 	
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "PROFILE")
@@ -52,7 +52,7 @@ public abstract class Person implements Serializable {
 		this.name = name;
 		this.cpf = cpf;
 		this.email = email;
-		this.senha = password;
+		this.password = password;
 		addProfile(Profile.CLIENT);
 
 	}
@@ -80,11 +80,11 @@ public abstract class Person implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getSenha() {
-		return senha;
+	public String getPassword() {
+		return password;
 	}
-	public void setSenha(String password) {
-		this.senha = password;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public Set<Profile> getProfiles() {
 		return profiles.stream().map(x -> Profile.toEnum(x)).collect(Collectors.toSet());
