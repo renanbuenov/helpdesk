@@ -60,5 +60,11 @@ public class TechService {
 		}
 	}
 
-
+	public void delete(Integer id) {
+		Technician obj = findById(id);
+		if (obj.getTickets().size() > 0) {
+			throw new DataIntegrityViolationException("Technician has service orders assigned and can not be deleted!");
+		}
+		repository.deleteById(id);
+	}
 }
