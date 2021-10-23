@@ -1,5 +1,8 @@
 package com.renan.helpdesk.resources;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,5 +25,12 @@ public class TicketResource {
 	public ResponseEntity<TicketDTO> findById(@PathVariable Integer id){
 		Ticket obj = service.findById(id);
 		return ResponseEntity.ok().body(new TicketDTO(obj));
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<TicketDTO>> findAll(){
+		List<Ticket> list = service.findAll();
+		List<TicketDTO> listDTO = list.stream().map(obj -> new TicketDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDTO);
 	}
 }
