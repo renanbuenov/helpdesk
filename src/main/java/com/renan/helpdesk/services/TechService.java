@@ -3,6 +3,8 @@ package com.renan.helpdesk.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +38,15 @@ public class TechService {
 		objDTO.setId(null);
 		validateByCpfandEmail(objDTO);
 		Technician newObj = new Technician(objDTO);
-		return repository.save(newObj);
+		return repository.save(newObj);	
+	}
+	
+	public Technician update(Integer id, @Valid TechnicianDTO objDTO) {
+		objDTO.setId(id);
+		Technician oldObj = findById(id);
+		validateByCpfandEmail(objDTO);
+		oldObj = new Technician(objDTO);
+		return repository.save(oldObj);
 	}
 	
 	private void validateByCpfandEmail(TechnicianDTO objDTO) {
@@ -49,4 +59,6 @@ public class TechService {
 			throw new DataIntegrityViolationException("Email is already added on the system!");
 		}
 	}
+
+
 }
