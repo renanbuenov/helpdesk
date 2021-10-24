@@ -47,6 +47,10 @@ public class TechService {
 	public Technician update(Integer id, @Valid TechnicianDTO objDTO) {
 		objDTO.setId(id);
 		Technician oldObj = findById(id);
+		
+		if(!objDTO.getPassword().equals(oldObj.getPassword()))
+			objDTO.setPassword(encoder.encode(objDTO.getPassword()));
+		
 		validateByCpfandEmail(objDTO);
 		oldObj = new Technician(objDTO);
 		return repository.save(oldObj);
