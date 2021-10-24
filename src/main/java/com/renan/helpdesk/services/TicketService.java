@@ -1,5 +1,6 @@
 package com.renan.helpdesk.services;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,6 +42,13 @@ public class TicketService {
 		return repository.save(newTicket(objDTO));
 	}
 	
+	public Ticket update(Integer id, @Valid TicketDTO objDTO) {
+		objDTO.setId(id);
+		Ticket oldObj = findById(id);
+		oldObj = newTicket(objDTO);
+		return repository.save(oldObj);
+	}
+	
 	private Ticket newTicket(TicketDTO obj) {
 		Technician technician = techService.findById(obj.getTechnician());
 		Client client = clientService.findById(obj.getClient());
@@ -48,6 +56,10 @@ public class TicketService {
 		Ticket ticket = new Ticket();
 		if(obj.getId() != null) {
 			ticket.setId(obj.getId());
+		}
+		
+		if(obj.getStatus().equals(2)) {
+			ticket.setDateClosed(LocalDate.now());
 		}
 		
 		ticket.setTechnician(technician);
@@ -58,4 +70,6 @@ public class TicketService {
 		ticket.setObservation(obj.getObservation());
 		return ticket;
 	}
+
+
 }
