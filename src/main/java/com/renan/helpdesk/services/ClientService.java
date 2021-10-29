@@ -51,7 +51,7 @@ public class ClientService {
 		
 		if(!objDTO.getPassword().equals(oldObj.getPassword()))
 			objDTO.setPassword(encoder.encode(objDTO.getPassword()));
-		
+			
 		validateByCpfandEmail(objDTO);
 		oldObj = new Client(objDTO);
 		return repository.save(oldObj);

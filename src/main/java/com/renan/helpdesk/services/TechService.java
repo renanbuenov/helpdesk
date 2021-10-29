@@ -56,22 +56,24 @@ public class TechService {
 		return repository.save(oldObj);
 	}
 	
+	public void delete(Integer id) {
+		Technician obj = findById(id);
+		
+		if (obj.getTickets().size() > 0) {
+			throw new DataIntegrityViolationException("Technician has service orders assigned and can not be deleted!");
+		}
+		repository.deleteById(id);
+	}
+	
 	private void validateByCpfandEmail(TechnicianDTO objDTO) {
 		Optional<Person> obj = personRepository.findByCpf(objDTO.getCpf());
 		if(obj.isPresent() && obj.get().getId() != objDTO.getId()) {
 			throw new DataIntegrityViolationException("CPF is already added on the system!");
 		}
+		
 		obj = personRepository.findByEmail(objDTO.getEmail());
 		if(obj.isPresent() && obj.get().getId() != objDTO.getId()) {
 			throw new DataIntegrityViolationException("Email is already added on the system!");
 		}
-	}
-
-	public void delete(Integer id) {
-		Technician obj = findById(id);
-		if (obj.getTickets().size() > 0) {
-			throw new DataIntegrityViolationException("Technician has service orders assigned and can not be deleted!");
-		}
-		repository.deleteById(id);
 	}
 }
